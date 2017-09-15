@@ -1,14 +1,15 @@
 import pandas as pds
 import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense
-import keras
+##from keras.models import Sequential
+#3from keras.layers import Dense
+##import keras
+
 
 ##imports desired data
-dataframeX = pds.read_csv('KaggleV2-May-2016.csv', usecols=[1,2,5,7,8,9,10,11,12,13])
+dataframeX = pds.read_csv('KaggleV2-May-2016.csv', usecols=[1])
 dataframeY = pds.read_csv('KaggleV2-May-2016.csv')
 
-
+'''
 ##makes data usable numerical values
 def genderToInt(gender):
     if gender == 'M': 
@@ -22,15 +23,14 @@ def ifShowToInt(noShow):
     else:
         return 1
 
-##applys the test to numerical value filters 
-dataframeY.NoShow = dataframeY.NoShow.apply(ifShowToInt)
+##applys \the test to numerical value filters 
+dataframeX.NoShow = dataframeX.NoShow.apply(ifShowToInt)
 dataframeX.Gender = dataframeX.Gender.apply(genderToInt)
-
+'''
 
 ##debug code
-print(dataframeX.head())
-print(dataframeY.head())
-
+print(dataframeX)
+'''
 ##random number generator
 seed = 7
 np.random.seed(seed)
@@ -47,3 +47,4 @@ tbCallback = keras.callbacks.TensorBoard(log_dir='/tmp/keras_logs', write_graph=
 model.compile(loss='mean_squared_error', optimizer='adam', metrics = ['accuracy'])
 ###trained here with 9 passes, and 30% splitoff for validation
 model.fit(dataframeX.values, dataframeY.values, epochs=9, batch_size=50, verbose=1, validation_split=0.3, callbacks=[tbCallback])
+'''
